@@ -1,3 +1,5 @@
+import datetime
+
 from telegram import Update
 from telegram.ext import CallbackContext
 from telegram.ext import ConversationHandler
@@ -27,4 +29,5 @@ def auth(update: Update, context: CallbackContext) -> int:
 
 def checkTotp(value: str) -> bool:
     totp = pyotp.TOTP(TOTP_KEY)
-    return totp.verify(value)
+    delta = datetime.timedelta(seconds=30)
+    return totp.verify(otp=value) or totp.verify(for_time=datetime.datetime.now() - delta, otp=value) or totp.verify(for_time=datetime.datetime.now() + delta, otp=value)

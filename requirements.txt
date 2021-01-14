@@ -1,0 +1,5 @@
+python-telegram-bot
+dataclasses-serialization
+pyotp
+PyQRCode
+requests

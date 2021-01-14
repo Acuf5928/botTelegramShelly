@@ -1,18 +1,9 @@
-from dataclasses import dataclass
-from typing import List
-
 import requests
-from dataclasses_serialization.json import JSONStrSerializerMixin
 from telegram import Update
 from telegram.ext import CallbackContext
 
-@dataclass
-class ShellyInfo(JSONStrSerializerMixin):
-    name: str
-    ip: str
-    relay: str
-    user: str
-    password: str
+from code_helper import ShellyInfo
+from code_helper import retrieveDevicesInfo
 
 
 def putOn(update: Update, context: CallbackContext):
@@ -69,16 +60,6 @@ def putOff(update: Update, context: CallbackContext):
 
     link = createLink(targetDevice, "off")
     requests.get(link, timeout=2)
-
-
-def retrieveDevicesInfo() -> List[ShellyInfo]:
-    listShelly: List[ShellyInfo] = []
-
-    with open("./db", "r") as file:
-        for element in file.readlines():
-            listShelly.append(ShellyInfo.from_json_str(element.replace("\n", "")))
-
-    return listShelly
 
 
 def createLink(info: ShellyInfo, command: str) -> str:

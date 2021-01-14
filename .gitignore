@@ -2,3 +2,5 @@
 __cache__
 __pycache__
 const_private.py
+experiment.py
+db

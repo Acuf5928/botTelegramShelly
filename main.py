@@ -7,6 +7,7 @@ from telegram.ext import MessageHandler
 from telegram.ext import Updater
 
 from code_auth_fun import auth
+from code_generate_totp_key import setupBot
 from code_wait import wait
 from const import REGEX_KEY_AUTH
 from const import WAIT
@@ -46,4 +47,7 @@ if __name__ == '__main__':
         from const_private import TELEGRAM_TOKEN
         main()
     except Exception:
-        print("Set your key first!")
+        if setupBot():
+            print("Configuration file created successfully, restart the program")
+        else:
+            print("Impossible create config file")

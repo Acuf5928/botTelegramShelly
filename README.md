@@ -10,5 +10,6 @@ TODO:
 - code_auth_fun:
   - check the previous and next code in addition to the current one to make the process easier
 - code_generate_totp_key:
-  - Create a qr code
   - Check if your app generate correct code
+
+I'm not affiliate with shelly in any way

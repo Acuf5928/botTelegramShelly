@@ -34,7 +34,7 @@ def wait(update: Update, context: CallbackContext) -> int:
     elif re.search(REGEX_KEY_DELETE, message[0], re.IGNORECASE):
         removeDevice(update, context)
     elif re.search(REGEX_KEY_LIST, message[0], re.IGNORECASE):
-        removeDevice(listDevice, context)
+        listDevice(update, context)
     elif re.search(REGEX_KEY_EXIT, message[0], re.IGNORECASE):
         context.bot.send_message(chat_id=chat_id, text="Connessione chiusa")
         return ConversationHandler.END

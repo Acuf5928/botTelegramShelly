@@ -6,11 +6,13 @@ from telegram.ext import ConversationHandler
 
 from code_change_shelly_status import putOff
 from code_change_shelly_status import putOn
+from code_list_device import listDevice
 from code_manage_device import addDevice
 from code_manage_device import removeDevice
 from const import REGEX_KEY_ADD
 from const import REGEX_KEY_DELETE
 from const import REGEX_KEY_EXIT
+from const import REGEX_KEY_LIST
 from const import REGEX_KEY_PUT_OFF
 from const import REGEX_KEY_PUT_ON
 from const import WAIT
@@ -31,8 +33,12 @@ def wait(update: Update, context: CallbackContext) -> int:
         addDevice(update, context)
     elif re.search(REGEX_KEY_DELETE, message[0], re.IGNORECASE):
         removeDevice(update, context)
+    elif re.search(REGEX_KEY_LIST, message[0], re.IGNORECASE):
+        removeDevice(listDevice, context)
     elif re.search(REGEX_KEY_EXIT, message[0], re.IGNORECASE):
         context.bot.send_message(chat_id=chat_id, text="Connessione chiusa")
         return ConversationHandler.END
+    else:
+        context.bot.send_message(chat_id=chat_id, text="Comando non riconosciuto")
 
     return WAIT

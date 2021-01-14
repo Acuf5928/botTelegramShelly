@@ -7,7 +7,7 @@ from telegram import Update
 from telegram.ext import CallbackContext
 
 @dataclass
-class ShellyInfo((JSONStrSerializerMixin)):
+class ShellyInfo(JSONStrSerializerMixin):
     name: str
     ip: str
     relay: str

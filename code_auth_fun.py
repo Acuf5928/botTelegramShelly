@@ -11,6 +11,7 @@ try:
 except Exception:
     pass
 
+
 def auth(update: Update, context: CallbackContext) -> int:
     user = update.message.from_user.username
     chat_id = update.message.chat_id

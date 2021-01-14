@@ -1,3 +1,5 @@
+import os
+
 from telegram import Update
 from telegram.ext import CallbackContext
 import re
@@ -20,8 +22,11 @@ from const import WAIT
 
 def wait(update: Update, context: CallbackContext) -> int:
     chat_id = update.message.chat_id
-    message = update.message.text
 
+    if not os.path.exists("./db") or not os.path.isfile("./db"):
+        context.bot.send_message(chat_id=chat_id, text="Crea il db prima")
+
+    message = update.message.text
     message = message.lower()
     message = message.split(" ")
 

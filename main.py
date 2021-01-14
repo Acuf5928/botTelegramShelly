@@ -10,7 +10,6 @@ from code_auth_fun import auth
 from code_wait import wait
 from const import REGEX_KEY_AUTH
 from const import WAIT
-from const_private import TELEGRAM_TOKEN
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.ERROR)
@@ -43,4 +42,8 @@ def main() -> None:
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        from const_private import TELEGRAM_TOKEN
+        main()
+    except Exception:
+        print("Set your key first!")

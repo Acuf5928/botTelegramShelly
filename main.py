@@ -10,10 +10,9 @@ from code_auth_fun import auth
 from code_wait import wait
 from const import REGEX_KEY_AUTH
 from const import WAIT
+from const_private import TELEGRAM_TOKEN
 
 # Enable logging
-from const_telegram_token import TELEGRAM_TOKEN
-
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.ERROR)
 
 logger = logging.getLogger(__name__)

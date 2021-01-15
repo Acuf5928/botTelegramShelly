@@ -15,17 +15,17 @@ class ShellyInfo(JSONStrSerializerMixin):
     password: str
 
 
-def retrieveDevicesInfo() -> List[ShellyInfo]:
+def retrieveDevicesInfo(path: str = "./db") -> List[ShellyInfo]:
     listShelly: List[ShellyInfo] = []
 
-    with open("./db", "r") as file:
+    with open(path, "r") as file:
         for element in file.readlines():
             listShelly.append(ShellyInfo.from_json_str(element.replace("\n", "")))
 
     return listShelly
 
 
-def checkTotp(value: str, key: str) -> bool:
+# timeNow and delta are set in this way for testing purpose
+def checkTotp(value: str, key: str, timeNow: datetime = datetime.datetime.now(), delta: datetime = datetime.timedelta(seconds=30)) -> bool:
     totp = pyotp.TOTP(key)
-    delta = datetime.timedelta(seconds=30)
-    return totp.verify(otp=value) or totp.verify(for_time=datetime.datetime.now() - delta, otp=value) or totp.verify(for_time=datetime.datetime.now() + delta, otp=value)
+    return totp.verify(for_time=timeNow, otp=value) or totp.verify(for_time=timeNow - delta, otp=value) or totp.verify(for_time=timeNow + delta, otp=value)
